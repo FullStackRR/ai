@@ -18,7 +18,7 @@ class BlessingService {
           n: 3 
         }, {
           headers: {
-            'Authorization': 'Bearer YOUR_API_KEY',
+            'Authorization': 'Bearer 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',
           }
         });
     
