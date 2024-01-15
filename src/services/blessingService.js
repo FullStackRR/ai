@@ -1,3 +1,4 @@
+const axios=require('axios')
 class BlessingService {
     constructor(gptService) {
       this.chatGptService = gptService;
@@ -11,18 +12,19 @@ class BlessingService {
   
     // GET endpoint to fetch blessings
       try {
-   
+   console.log("pppppppp")
         const response = await axios.post('https://api.openai.com/v1/chat/completions', {
           prompt: this.prompt,
           max_tokens: 300, 
           n: 3 
         }, {
           headers: {
-            'Authorization': 'Bearer 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',
+            'Authorization': 'Bearer API_KEY',
           }
         });
     
         // Extract the generated blessings from the API response
+        console.log("ooooooooo")
          response.data.choices.map(choice => {
           this.blessings.push(choice.text.trim())
         });
@@ -30,11 +32,11 @@ class BlessingService {
         return blessings[0];
       } catch (error) {
         console.error('Error:', error.message);
-        res.status(500).send('Internal Server Error');
+        // res.status(500).send('Internal Server Error');
       }
     
       // this.blessings=["pp","ll","oo"]
-      return this.blessings[i++]
+      
     
   }
 
@@ -44,8 +46,8 @@ class BlessingService {
     if(this.i<3){
       return this.blessings[this.i++];
     }
-  // return this.getBlessing(this.prompt);
-  return "ops"
+   return this.getBlessing(this.prompt);
+
   }
   }
   
