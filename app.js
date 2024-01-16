@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(express.json());
 
-const chatGptApiKey = process.env.OPENAI_API_KEY; // Replace with your OpenAI GPT-3 API key
+const chatGptApiKey =API_KEY; // Replace with your OpenAI GPT-3 API key
 
 app.get('/getBlessings', async (req, res) => {
   try {
