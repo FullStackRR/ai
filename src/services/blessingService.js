@@ -19,7 +19,7 @@ class BlessingService {
   //         n: 3 
   //       }, {
   //         headers: {
-  //           'Authorization': 'Bearer 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',
+  //           'Authorization': 'Bearer API_KEY',
   //         }
   //       });
     
