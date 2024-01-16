@@ -6,12 +6,23 @@ const port = 3000;
 
 app.use(express.json());
 
-const chatGptApiKey = API_KEY; // Replace with your OpenAI GPT-3 API key
+const chatGptApiKey = process.env.OPENAI_API_KEY; // Replace with your OpenAI GPT-3 API key
 
-app.post('/getBlessings', async (req, res) => {
+app.get('/getBlessings', async (req, res) => {
   try {
     // Call ChatGPT to get three blessings
-    const blessings = await getChatGptBlessings();
+    console.log(req)
+    console.log(";;;;;;;;;;;;;;;;;;;")
+
+const { enviorment, length,type,target } = req.query
+console.log(length)
+
+
+
+
+    const prompt=generatPrompt(enviorment,type,length,target)
+    console.log(prompt)
+    const blessings = await getChatGptBlessings(prompt);
 
     // Save blessings in an array (you can store it in a database if needed)
     const blessingsArray = blessings.data.choices.map(choice => choice.text);
@@ -25,9 +36,11 @@ app.post('/getBlessings', async (req, res) => {
     // res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-async function getChatGptBlessings() {
-  const prompt = 'Generate a blessing.';
+function generatPrompt(enviorment,type,length,target){
+  return `Generate a ${enviorment} ${length} blessing for a ${target}`
+  }
+async function getChatGptBlessings(prompt) {
+  // const prompt = 'Generate a blessing.';
   const maxTokens = 50; // You can adjust this based on your preference
 
   const response = await axios.post(
